@@ -1,28 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemaViajes.Domain;
-
 import sistemaViajes.Categoria;
+import sistemaViajes.Retorno;
 
-/**
- *
- * @author franc
- */
-public class Passenger {
+public class Passenger implements Comparable<Passenger> {
     
     private String dni;
-    private String Name;
+    private String name;      
     private int age;
-    private Categoria Category;
+    private Categoria category;
     
-    public Passenger(String dni, String Name, int age, Categoria Category) {
+    public Passenger(String dni, String name, int age, Categoria category) {
         this.dni = dni;
-        this.Name = Name;
+        this.name = name;
         this.age = age;
-        this.Category = Category;
+        this.category = category;
     }
-    
-    
+
+    @Override
+    public int compareTo(Passenger o) {
+        return this.dni.compareTo(o.dni);
+    }
+
+    public Retorno validate() {
+        if (dni == null || name == null || category == null)
+            return Retorno.error1();
+        
+        // Matches: N.NNN.NNN-N or NNN.NNN-N
+        if (!dni.matches("^(\\d\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$"))
+            return Retorno.error2();
+        
+        if (age <= 0)
+            return Retorno.error3();
+        
+        return null; 
+    }
+
+    // Getters
+    public String getDni()          { return dni; }
+    public String getName()         { return name; }
+    public int getAge()             { return age; }
+    public Categoria getCategory()  { return category; }
+
+    @Override
+    public String toString() {
+        return "DNI: " + dni + " | Name: " + name + 
+               " | Age: " + age + " | Category: " + category;
+    }
 }

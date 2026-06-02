@@ -1,31 +1,40 @@
 package sistemaViajes;
 
 //Agregar aquí nombres y números de estudiante de los integrantes del equipo
-public class ImplementacionSistema implements Sistema {
 
+import sistemaViajes.Domain.Passenger;
+import sistemaViajes.TADS.PassengerList;
+
+public class ImplementacionSistema implements Sistema {
+    private PassengerList passengerList = null;
+    
     @Override
     public Retorno inicializarSistema() {
-        return Retorno.noImplementada();
+        this.passengerList = new PassengerList();
+        // seed some data
+        return Retorno.ok();
     }
 
     @Override
     public Retorno registrarPasajero(String cedula, String nombre, int edad, Categoria categoria) {
-        return Retorno.noImplementada();
+        Passenger p = new Passenger(cedula, nombre, edad, categoria);
+        return passengerList.registerPassenger(p);
     }
 
     @Override
     public Retorno buscarPasajero(String cedula) {
-        return Retorno.noImplementada();
+        return passengerList.searchPassenger(cedula);
     }
 
     @Override
     public Retorno listarPasajerosAscendente() {
-        return Retorno.noImplementada();
+        return passengerList.listPassengerAscn();
     }
 
     @Override
     public Retorno listarPasajerosDescendente() {
-        return Retorno.noImplementada();
+                return Retorno.noImplementada();
+
     }
 
     @Override
