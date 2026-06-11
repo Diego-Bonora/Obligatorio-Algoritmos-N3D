@@ -18,6 +18,10 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno registrarPasajero(String cedula, String nombre, int edad, Categoria categoria) {
         Passenger p = new Passenger(cedula, nombre, edad, categoria);
+        Retorno err = p.validate();
+        if (err != null) {
+            return err;
+        }
         return passengerList.registerPassenger(p);
     }
 
@@ -33,13 +37,12 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno listarPasajerosDescendente() {
-                return Retorno.noImplementada();
-
+        return passengerList.listPassengerDesc();
     }
 
     @Override
     public Retorno listarPasajerosPorCategoría(Categoria unaCategoria) {
-        return Retorno.noImplementada();
+        return passengerList.listPassenfersByCategoty(unaCategoria);
     }
 
     @Override

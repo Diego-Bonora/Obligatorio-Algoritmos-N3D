@@ -4,19 +4,16 @@
  */
 package sistemaViajes.Interfaces;
 
+import sistemaViajes.Categoria;
 import sistemaViajes.Domain.Passenger;
 import sistemaViajes.Retorno;
 
-/**
- *
- * @author franc
- */
 public interface IPassengerList {
-    Retorno registerPassenger(Passenger p); // 
-    Retorno searchPassenger(String dni); 
+    Retorno registerPassenger(Passenger p);
+    Retorno searchPassenger(String dni);
     Retorno listPassengerAscn();
     Retorno listPassengerDesc();
-    Retorno listPassenfersByCategoty();
+    Retorno listPassenfersByCategoty(Categoria category);
 }
 
 

@@ -18,37 +18,68 @@ public abstract class List<T extends Comparable<T>> implements IList<T> {
 
     @Override
     public void addFirst(T obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Node newNode = new Node(obj);
+        newNode.setNext(firstNode);
+        if (firstNode == null) {
+            lastNode = newNode;
+        }
+        firstNode = newNode;
+        size++;
     }
 
     @Override
     public String show() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        StringBuilder sb = new StringBuilder();
+        Node aux = firstNode;
+        while (aux != null) {
+            sb.append(aux.getValue());
+            if (aux.getNext() != null) sb.append(" ");
+            aux = aux.getNext();
+        }
+        return sb.toString();
     }
 
     @Override
     public int qty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return firstNode == null;
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        firstNode = null;
+        lastNode = null;
+        size = 0;
     }
 
     @Override
     public boolean elExists(T obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Node aux = firstNode;
+        while (aux != null) {
+            if (aux.getValue().equals(obj)) {
+                return true;
+            }
+            aux = aux.getNext();
+        }
+        return false;
     }
 
     @Override
     public T getElement(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Node aux = firstNode;
+        int i = 0;
+        while (aux != null) {
+            if (i == index) {
+                return aux.getValue();
+            }
+            i++;
+            aux = aux.getNext();
+        }
+        return null;
     }
 
     @Override

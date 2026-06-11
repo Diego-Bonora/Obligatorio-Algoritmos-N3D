@@ -18,21 +18,34 @@ public class Passenger implements Comparable<Passenger> {
 
     @Override
     public int compareTo(Passenger o) {
-        return this.dni.compareTo(o.dni);
+        return this.name.compareTo(o.name);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Passenger)) return false;
+        return this.dni != null && this.dni.equals(((Passenger) o).dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return dni != null ? dni.hashCode() : 0;
     }
 
     public Retorno validate() {
         if (dni == null || name == null || category == null)
             return Retorno.error1();
-        
-        // Matches: N.NNN.NNN-N or NNN.NNN-N
-        if (!dni.matches("^(\\d\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$"))
+        if (dni.isBlank() || name.isBlank())
+            return Retorno.error1();
+
+        // Formats: N.NNN.NNN-V (7-digit, no leading zero) or NNN.NNN-V (6-digit)
+        if (!dni.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$"))
             return Retorno.error2();
-        
-        if (age <= 0)
+
+        if (age < 0)
             return Retorno.error3();
-        
-        return null; 
+
+        return null;
     }
 
     // Getters
