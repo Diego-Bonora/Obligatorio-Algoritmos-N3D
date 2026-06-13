@@ -16,20 +16,29 @@ public class Passenger implements Comparable<Passenger> {
         this.category = category;
     }
 
-    @Override
-    public int compareTo(Passenger o) {
-        return this.name.compareTo(o.name);
+ @Override
+public int compareTo(Passenger o) {
+    long n1 = extractNumber(this.dni);
+    long n2 = extractNumber(o.dni);
+    return Long.compare(n1, n2);
+}
+
+private long extractNumber(String dni) {
+    long result = 0;
+    for (int i = 0; i < dni.length(); i++) {
+        char c = dni.charAt(i);
+        if (c == '-') break; // stop before the verification digit
+        if (c >= '0' && c <= '9') {
+            result = result * 10 + (c - '0');
+        }
     }
+    return result;
+}
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Passenger)) return false;
         return this.dni != null && this.dni.equals(((Passenger) o).dni);
-    }
-
-    @Override
-    public int hashCode() {
-        return dni != null ? dni.hashCode() : 0;
     }
 
     public Retorno validate() {
