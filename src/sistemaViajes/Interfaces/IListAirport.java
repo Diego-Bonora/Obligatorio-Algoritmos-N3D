@@ -14,9 +14,8 @@ import sistemaViajes.Retorno;
  */
 public interface IListAirport {
     
-        Retorno registerPassenger(Airport p);
-    Retorno searchPassenger(String dni); 
-    Retorno listPassengerAscn();
-    Retorno listPassengerDesc();
-    Retorno listPassenfersByCategoty();
+    Retorno GetAirport(String code);
+
+    Retorno RegisterFlight(String codeAirport_origin, String codeAirport_Destiny, String FlightCode, int Capacity, int usdCost);
+    
 }
